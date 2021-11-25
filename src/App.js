@@ -4,7 +4,9 @@ import { NotificationContainer } from "react-notifications";
 
 import Landing from "pages/Landing";
 import Home from "pages/Home";
+import Profile from "pages/Profile";
 
+import PrivateRoute from "PrivateRoute";
 import { AuthContext } from "contexts/AuthContext";
 import { API, setAuthToken } from "config/api";
 
@@ -45,15 +47,22 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          {state.user ? (
-            <Route exact path="/" component={Home} />
-          ) : (
-            <Route exact path="/" component={Landing} />
-          )}
-        </Switch>
-      </Router>
+      {state.isLoading ? (
+        "Loading..."
+      ) : (
+        <>
+          <Router>
+            <Switch>
+              {state.user ? (
+                <PrivateRoute exact path="/" component={Home} />
+              ) : (
+                <Route exact path="/" component={Landing} />
+              )}
+              <PrivateRoute path="/profile" component={Profile} />
+            </Switch>
+          </Router>
+        </>
+      )}
       <NotificationContainer />
     </div>
   );

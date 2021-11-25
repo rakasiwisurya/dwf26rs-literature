@@ -36,7 +36,7 @@ export default function Header() {
                   <Link
                     className="nav-link text-white"
                     aria-current="page"
-                    to=""
+                    to="/profile"
                   >
                     Profile
                   </Link>
