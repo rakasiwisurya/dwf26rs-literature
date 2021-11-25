@@ -49,7 +49,7 @@ export default function ModalRegister(props) {
         });
       }
     } catch (error) {
-      console.log(error);      
+      console.log(error);
     }
   };
 
@@ -74,7 +74,7 @@ export default function ModalRegister(props) {
         );
       }
 
-      handleLogin()
+      handleLogin();
     } catch (error) {
       console.log(error);
       if (error?.response.data?.message) {

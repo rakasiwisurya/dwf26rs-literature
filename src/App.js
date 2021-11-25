@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 
 import Landing from "pages/Landing";
-import Search from "pages/Search";
+import Home from "pages/Home";
 
 import { AuthContext } from "contexts/AuthContext";
 import { API, setAuthToken } from "config/api";
@@ -48,7 +48,7 @@ function App() {
       <Router>
         <Switch>
           {state.user ? (
-            <Route exact path="/" component={Search} />
+            <Route exact path="/" component={Home} />
           ) : (
             <Route exact path="/" component={Landing} />
           )}

@@ -16,7 +16,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg bg-tranparent">
+      <nav className="navbar navbar-expand-lg bg-tranparent fixed-top">
         <div className="container">
           <button
             className="navbar-toggler"
