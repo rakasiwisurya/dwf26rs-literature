@@ -63,11 +63,28 @@ body {
   h5,
   h6 {
     font-family: 'Times New Roman', Times, serif;
+  }  
+
+  .form-control {
+    background-color: rgba($color: #D2D2D2, $alpha: 0.25);
+    border: 2px solid #BCBCBC;
+    color: #fff;
+    resize: none;
   }
 
-  // main {
-  //   margin-top: 107px;
-  // }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25);
+  }
+
+  .form-select {
+    background-color: #ddd;
+    border: 2px solid #BCBCBC;
+    color: #6c757d;
+  }
+
+  .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25)
+  }
 
   .modal-backdrop {
     background-color: #ccc;

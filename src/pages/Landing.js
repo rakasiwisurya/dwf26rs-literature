@@ -1,22 +1,19 @@
 import { useState, useContext } from "react";
-import { NotificationManager } from "react-notifications";
 
 import Header from "components/Header";
-import { ModalLogin } from "elements";
+import { ModalLogin, ModalRegister } from "elements";
 
 import { AuthContext } from "contexts/AuthContext";
 
 import Books from "assets/images/books.svg";
 
 export default function Landing() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   const [show, setShow] = useState({
     login: false,
     register: false,
   });
-
-  console.log(state);
 
   const handleClose = () => {
     setShow({ login: false, register: false });
@@ -91,6 +88,13 @@ export default function Landing() {
 
       <ModalLogin
         show={show.login}
+        handleClose={handleClose}
+        handleSwitch={handleSwitch}
+        dispatch={dispatch}
+      />
+
+      <ModalRegister
+        show={show.register}
         handleClose={handleClose}
         handleSwitch={handleSwitch}
         dispatch={dispatch}

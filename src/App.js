@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 
 import Landing from "pages/Landing";
+import Search from "pages/Search";
 
 import { AuthContext } from "contexts/AuthContext";
 import { API, setAuthToken } from "config/api";
@@ -15,7 +16,7 @@ if (localStorage.token) {
 }
 
 function App() {
-  const { dispatch } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
 
   const checkUser = async () => {
     try {
@@ -46,7 +47,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing} />
+          {state.user ? (
+            <Route exact path="/" component={Search} />
+          ) : (
+            <Route exact path="/" component={Landing} />
+          )}
         </Switch>
       </Router>
       <NotificationContainer />

@@ -6,12 +6,16 @@ import { API, setAuthToken } from "config/api";
 
 import "./index.scss";
 
-export default function ModalLogin(props) {
+export default function ModalRegister(props) {
   const { show, handleClose, handleSwitch, dispatch } = props;
 
   const [form, setForm] = useState({
     email: "",
     password: "",
+    fullname: "",
+    gender: "male",
+    phone: "",
+    address: "",
   });
 
   const handleChange = (e) => {
@@ -21,7 +25,35 @@ export default function ModalLogin(props) {
     }));
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const body = JSON.stringify({
+        email: form.email,
+        password: form.password,
+      });
+
+      const response = await API.post("/login", body, config);
+
+      setAuthToken(response?.data.data.token);
+
+      if (response?.status === 200) {
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: response.data.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);      
+    }
+  };
+
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
@@ -33,21 +65,16 @@ export default function ModalLogin(props) {
 
       const body = JSON.stringify(form);
 
-      const response = await API.post("/login", body, config);
-
-      setAuthToken(response?.data.data.token);
+      const response = await API.post("/register", body, config);
 
       if (response?.status === 200) {
-        dispatch({
-          type: "LOGIN_SUCCESS",
-          payload: response.data.data,
-        });
         NotificationManager.success(
           response.data.message,
           response.data.status
         );
-        handleClose();
       }
+
+      handleLogin()
     } catch (error) {
       console.log(error);
       if (error?.response.data?.message) {
@@ -65,10 +92,10 @@ export default function ModalLogin(props) {
         className="px-4 pt-4 fw-bold fs-1"
         style={{ fontFamily: "Avenir, sans-serif" }}
       >
-        Sign In
+        Sign Up
       </Modal.Title>
       <Modal.Body className="p-4">
-        <Form onSubmit={handleLogin}>
+        <Form onSubmit={handleRegister}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Control
               type="email"
@@ -85,8 +112,42 @@ export default function ModalLogin(props) {
               value={form.password}
             />
           </Form.Group>
+          <Form.Group className="mb-3" controlId="fullname">
+            <Form.Control
+              type="text"
+              placeholder="Fullname"
+              onChange={handleChange}
+              value={form.fullname}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="gender">
+            <Form.Select
+              aria-label="gender"
+              value={form.gender}
+              onChange={handleChange}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="phone">
+            <Form.Control
+              type="text"
+              placeholder="Phone"
+              onChange={handleChange}
+              value={form.phone}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="address">
+            <Form.Control
+              as="textarea"
+              placeholder="Address"
+              onChange={handleChange}
+              value={form.address}
+            />
+          </Form.Group>
           <Button variant="danger" type="submit" className="w-100 mb-2">
-            Sign In
+            Sign Up
           </Button>
           <div className="w-100 text-center">
             Already have an account ?{" "}
