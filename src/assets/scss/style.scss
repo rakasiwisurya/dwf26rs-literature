@@ -52,11 +52,24 @@
 // scss-docs-end import-stack
 
 body {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Avenir", sans-serif;
   background-color: $primary;
   color: $white;
 
-  main {
-    margin-top: 120px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  // main {
+  //   margin-top: 107px;
+  // }
+
+  .modal-backdrop {
+    background-color: #ccc;
   }
 }

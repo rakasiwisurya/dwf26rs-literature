@@ -1,0 +1,13 @@
+.modal-dialog {
+  max-width: 416px !important;
+
+  .modal-content {
+    background-color: #161616;
+
+    .form-control {
+      background-color: rgba($color: #D2D2D2, $alpha: 0.25);
+      border: 2px solid #BCBCBC;
+      color: #fff;
+    }
+  }
+}

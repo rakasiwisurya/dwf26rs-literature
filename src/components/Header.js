@@ -1,7 +1,19 @@
-import Logo from "assets/images/literature-small.svg";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { AuthContext } from "contexts/AuthContext";
+
+import Logo from "assets/images/literature-small.svg";
+
 export default function Header() {
+  const { state, dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    dispatch({
+      type: "LOGOUT",
+    });
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-tranparent">
@@ -35,7 +47,12 @@ export default function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" aria-current="page" to="">
+                <Link
+                  className="nav-link text-white"
+                  aria-current="page"
+                  to="/"
+                  onClick={handleLogout}
+                >
                   Logout
                 </Link>
               </li>
