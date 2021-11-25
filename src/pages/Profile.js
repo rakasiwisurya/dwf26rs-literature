@@ -10,7 +10,7 @@ export default function Profile() {
   const { state } = useContext(AuthContext);
 
   return (
-    <div className="profile mb-">
+    <div className="profile my-5">
       <Header />
       <main>
         <MyProfile state={state} />

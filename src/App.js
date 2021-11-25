@@ -5,6 +5,7 @@ import { NotificationContainer } from "react-notifications";
 import Landing from "pages/Landing";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
+import AddLiterature from "pages/AddLiterature";
 
 import PrivateRoute from "PrivateRoute";
 import { AuthContext } from "contexts/AuthContext";
@@ -59,6 +60,7 @@ function App() {
                 <Route exact path="/" component={Landing} />
               )}
               <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/add-literature" component={AddLiterature} />
             </Switch>
           </Router>
         </>

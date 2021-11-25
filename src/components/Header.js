@@ -15,8 +15,11 @@ export default function Header() {
   };
 
   return (
-    <header>
-      <nav className="navbar navbar-expand-lg bg-tranparent fixed-top">
+    <header className="header fixed-top">
+      <nav
+        className="navbar navbar-expand-lg"
+        style={{ backgroundColor: "#161616" }}
+      >
         <div className="container">
           <button
             className="navbar-toggler"
@@ -54,7 +57,7 @@ export default function Header() {
                   <Link
                     className="nav-link text-white"
                     aria-current="page"
-                    to=""
+                    to="/add-literature"
                   >
                     Add Literature
                   </Link>
@@ -72,9 +75,9 @@ export default function Header() {
               </ul>
             )}
 
-            <a className="navbar-brand" href="/">
+            <Link className="navbar-brand" to="/">
               <img src={Logo} alt="Literature Logo" />
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
