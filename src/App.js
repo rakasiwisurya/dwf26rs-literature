@@ -14,6 +14,7 @@ import { API, setAuthToken } from "config/api";
 
 import "react-notifications/lib/notifications.css";
 import "assets/scss/style.scss";
+import MyCollection from "pages/MyCollection";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -63,6 +64,7 @@ function App() {
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/add-literature" component={AddLiterature} />
               <PrivateRoute path="/detail/:id" component={DetailLiterature} />
+              <PrivateRoute path="/collection" component={MyCollection} />
             </Switch>
           </Router>
         </>
