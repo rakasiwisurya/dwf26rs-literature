@@ -6,6 +6,7 @@ import Landing from "pages/Landing";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import AddLiterature from "pages/AddLiterature";
+import DetailLiterature from "pages/DetailLiterature";
 
 import PrivateRoute from "PrivateRoute";
 import { AuthContext } from "contexts/AuthContext";
@@ -61,6 +62,7 @@ function App() {
               )}
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/add-literature" component={AddLiterature} />
+              <PrivateRoute path="/detail/:id" component={DetailLiterature} />
             </Switch>
           </Router>
         </>

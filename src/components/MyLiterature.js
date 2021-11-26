@@ -30,6 +30,7 @@ export default function MyLiterature({ state }) {
             >
               <PdfLiterature
                 attachment={item.attache}
+                literatureId={item.id}
                 title={item.title}
                 author={item.author}
                 publication_date={item.publication_date}
