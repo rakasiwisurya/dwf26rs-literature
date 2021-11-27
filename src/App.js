@@ -41,6 +41,9 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: "AUTH_ERROR",
+      });
     }
   };
 
