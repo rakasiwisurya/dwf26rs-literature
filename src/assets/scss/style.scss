@@ -93,7 +93,62 @@ body {
     box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25)
   }
 
+  .btn-smooth-danger {
+    background-color: #FF0742;
+  }
+
+  .text-smooth-danger {
+    color: #FF0742;
+  }
+
+  .text-smooth-warning {
+    color: #F7941E;
+  }
+
+  .btn-smooth-success {
+    background-color: #0ACF83;
+  }
+
+  .text-smooth-success {
+    color: #0ACF83;
+  }
+
   .modal-backdrop {
     background-color: #ccc;
+  }
+
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 0 5px rgba(151, 151, 151, 0.4);
+    inset: 60px 0px auto auto !important;
+    transform: none !important;
+  }
+
+  .dropdown-menu::after {
+    background-color: #fff;
+    content: "\00a0";
+    position: absolute;
+    display: block;
+    z-index: -1;
+    top: -7px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    box-shadow: -1px 1px 2px 0 rgba(178, 178, 178, 0.4);
+    transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+
+  .admin-home {
+    background-color: #F9F9F9;
+    color: $black;
+    min-height: 650px;
   }
 }

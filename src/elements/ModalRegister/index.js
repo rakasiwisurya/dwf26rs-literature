@@ -47,6 +47,8 @@ export default function ModalRegister(props) {
           type: "LOGIN_SUCCESS",
           payload: response.data.data,
         });
+
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

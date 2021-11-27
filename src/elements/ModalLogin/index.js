@@ -47,6 +47,8 @@ export default function ModalLogin(props) {
           response.data.status
         );
         handleClose();
+
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

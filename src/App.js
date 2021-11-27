@@ -6,6 +6,7 @@ import Landing from "pages/Landing";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import AddLiterature from "pages/AddLiterature";
+import MyCollection from "pages/MyCollection";
 import DetailLiterature from "pages/DetailLiterature";
 
 import PrivateRoute from "PrivateRoute";
@@ -14,7 +15,6 @@ import { API, setAuthToken } from "config/api";
 
 import "react-notifications/lib/notifications.css";
 import "assets/scss/style.scss";
-import MyCollection from "pages/MyCollection";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -51,7 +51,12 @@ function App() {
   return (
     <div className="App">
       {state.isLoading ? (
-        "Loading..."
+        <div
+          className="d-flex justify-content-center align-items-center w-100"
+          style={{ height: "100vh" }}
+        >
+          Loading...
+        </div>
       ) : (
         <>
           <Router>
