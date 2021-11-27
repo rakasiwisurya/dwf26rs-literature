@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Form, Modal, Button, FloatingLabel } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
 
 import { API, setAuthToken } from "config/api";
@@ -69,22 +69,22 @@ export default function ModalLogin(props) {
       </Modal.Title>
       <Modal.Body className="p-4">
         <Form onSubmit={handleLogin}>
-          <Form.Group className="mb-3" controlId="email">
+          <FloatingLabel className="mb-3" controlId="email" label="Email">
             <Form.Control
               type="email"
               placeholder="Email"
               onChange={handleChange}
               value={form.email}
             />
-          </Form.Group>
-          <Form.Group className="mb-4" controlId="password">
+          </FloatingLabel>
+          <FloatingLabel className="mb-4" controlId="password" label="Password">
             <Form.Control
               type="password"
               placeholder="Password"
               onChange={handleChange}
               value={form.password}
             />
-          </Form.Group>
+          </FloatingLabel>
           <Button variant="danger" type="submit" className="w-100 mb-2">
             Sign In
           </Button>

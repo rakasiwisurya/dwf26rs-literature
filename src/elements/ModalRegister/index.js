@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Modal, Button } from "react-bootstrap";
+import { Form, Modal, Button, FloatingLabel } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
 
 import { API, setAuthToken } from "config/api";
@@ -96,31 +96,39 @@ export default function ModalRegister(props) {
       </Modal.Title>
       <Modal.Body className="p-4">
         <Form onSubmit={handleRegister}>
-          <Form.Group className="mb-3" controlId="email">
+          <FloatingLabel className="mb-3" controlId="email" label="Email">
             <Form.Control
               type="email"
               placeholder="Email"
               onChange={handleChange}
               value={form.email}
             />
-          </Form.Group>
-          <Form.Group className="mb-4" controlId="password">
+          </FloatingLabel>
+          <FloatingLabel className="mb-4" controlId="password" label="Password">
             <Form.Control
               type="password"
               placeholder="Password"
               onChange={handleChange}
               value={form.password}
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="fullname">
+          </FloatingLabel>
+          <FloatingLabel
+            className="mb-3"
+            controlId="fullname"
+            label="Full Name"
+          >
             <Form.Control
               type="text"
-              placeholder="Fullname"
+              placeholder="Full Name"
               onChange={handleChange}
               value={form.fullname}
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="gender">
+          </FloatingLabel>
+          <FloatingLabel
+            className="mb-3 text-muted"
+            controlId="gender"
+            label="Gender"
+          >
             <Form.Select
               aria-label="gender"
               value={form.gender}
@@ -129,23 +137,23 @@ export default function ModalRegister(props) {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="phone">
+          </FloatingLabel>
+          <FloatingLabel className="mb-3" controlId="phone" label="Phone">
             <Form.Control
               type="text"
               placeholder="Phone"
               onChange={handleChange}
               value={form.phone}
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="address">
+          </FloatingLabel>
+          <FloatingLabel className="mb-3" controlId="address" label="Address">
             <Form.Control
               as="textarea"
               placeholder="Address"
               onChange={handleChange}
               value={form.address}
             />
-          </Form.Group>
+          </FloatingLabel>
           <Button variant="danger" type="submit" className="w-100 mb-2">
             Sign Up
           </Button>

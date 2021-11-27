@@ -67,29 +67,30 @@ body {
 
   main {
     margin-top: 90px;
+  }
 
-    .form-control {
-      background-color: rgba($color: #D2D2D2, $alpha: 0.25);
-      border: 2px solid #BCBCBC;
-      color: #fff;
-      resize: none;
-    }
+  .form-control {
+    background-color: rgba($color: #D2D2D2, $alpha: 0.25);
+    border: 2px solid #BCBCBC;
+    color: #fff;
+    resize: none;
+  }
 
-    .form-control:focus {
-      box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25);
-      background-color: rgba($color: #D2D2D2, $alpha: 0.25);
-      color: $white
-    }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25);
+    background-color: rgba($color: #D2D2D2, $alpha: 0.25);
+    color: $white
+  }
 
-    .form-select {
-      background-color: #ddd;
-      border: 2px solid #BCBCBC;
-      color: #6c757d;
-    }
+  .form-select {
+    background-color: #ddd;
+    border: 2px solid #BCBCBC;
+    color: #6c757d;
+    cursor: pointer;
+  }
 
-    .form-select:focus {
-      box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25)
-    }
+  .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25)
   }
 
   .modal-backdrop {

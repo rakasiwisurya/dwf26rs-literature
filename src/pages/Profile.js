@@ -10,9 +10,9 @@ export default function Profile() {
   const { state } = useContext(AuthContext);
 
   return (
-    <div className="profile my-5">
+    <div className="profile">
       <Header />
-      <main>
+      <main className="py-4">
         <MyProfile state={state} />
         <MyLiterature state={state} />
       </main>

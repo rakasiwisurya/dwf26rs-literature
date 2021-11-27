@@ -36,7 +36,7 @@ export default function MyCollection() {
             {myCollections.map((item, index) => (
               <div className="col-3" key={`myCollections-${index}`}>
                 <PdfLiterature
-                  attache={item?.literature.attache}
+                  attachment={item?.literature.attache}
                   literatureId={item?.literature.id}
                   title={item?.literature.title}
                   author={item?.literature.author}

@@ -82,12 +82,12 @@ export default function AddLiterature() {
   };
 
   return (
-    <div className="add-literature my-5">
+    <div className="add-literature">
       <Header />
 
-      <main>
+      <main className="py-4">
         <div className="container">
-          <h1 className="h3 fw-bold mb-5">Add Literature</h1>
+          <h1 className="h3 fw-bold mb-4">Add Literature</h1>
           <Form onSubmit={handleSubmit}>
             <FloatingLabel className="mb-3" controlId="title" label="Title">
               <Form.Control
