@@ -7,6 +7,7 @@ import { API } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
 
 import Header from "components/Header";
+import { ModalConfirm } from "elements";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -19,6 +20,7 @@ export default function DetailLiterature() {
   const [detailLiterature, setDetailLiterature] = useState(null);
   const [detailCollection, setDetailCollection] = useState(null);
   const [collected, setCollected] = useState(false);
+  const [show, setShow] = useState(false);
 
   const getDetailLiterature = async () => {
     try {
@@ -92,6 +94,23 @@ export default function DetailLiterature() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await API.delete(`/literatures/${detailLiterature?.id}`);
+
+      if (response.status === 200) {
+        NotificationManager.success(
+          response.data.message,
+          response.data.status
+        );
+
+        history.push("/profile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getDetailLiterature();
   }, []);
@@ -108,12 +127,6 @@ export default function DetailLiterature() {
         <div className="container">
           <div className="row">
             <div className="col-auto">
-              {/* <iframe
-                src={detailLiterature?.attache}
-                title={detailLiterature?.title}
-                height="400"
-                width="295"
-              /> */}
               <Document file={detailLiterature?.attache}>
                 <Page
                   pageNumber={1}
@@ -124,36 +137,30 @@ export default function DetailLiterature() {
               </Document>
             </div>
             <div className="col ps-5">
-              <div className="tag mb-4">
+              <div className="mb-4">
                 <h1 className="h3 fw-bold">{detailLiterature?.title}</h1>
                 <div className="text-muted" style={{ fontSize: 20 }}>
                   {detailLiterature?.author}
                 </div>
               </div>
 
-              <div className="tag mb-4">
-                <div className="fw-bold" style={{ fontSize: 20 }}>
-                  Publication Date
-                </div>
-                <div className="text-muted" style={{ fontSize: 16 }}>
+              <div className="mb-4">
+                <div className="fw-bold tag-title">Publication Date</div>
+                <div className="text-muted tag-data">
                   {detailLiterature?.author}
                 </div>
               </div>
 
-              <div className="tag mb-4">
-                <div className="fw-bold" style={{ fontSize: 20 }}>
-                  Pages
-                </div>
-                <div className="text-muted" style={{ fontSize: 16 }}>
+              <div className="mb-4">
+                <div className="fw-bold tag-title">Pages</div>
+                <div className="text-muted tag-data">
                   {detailLiterature?.pages}
                 </div>
               </div>
 
-              <div className="tag mb-4">
-                <div className="fw-bold" style={{ fontSize: 20 }}>
-                  ISBN
-                </div>
-                <div className="text-muted" style={{ fontSize: 16 }}>
+              <div className="mb-4">
+                <div className="fw-bold tag-title">ISBN</div>
+                <div className="text-muted tag-data">
                   {detailLiterature?.isbn}
                 </div>
               </div>
@@ -171,29 +178,59 @@ export default function DetailLiterature() {
               </div>
             </div>
             <div className="col-auto">
-              {!collected ? (
-                <>
-                  <button className="btn btn-danger" onClick={handleCollect}>
-                    Add My Collection
-                    <span>
-                      <i className="far fa-bookmark ms-2"></i>
-                    </span>
-                  </button>
-                </>
+              {state.user?.id === detailLiterature?.user.id ? (
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    setShow(true);
+                  }}
+                >
+                  Delete Literature
+                  <span>
+                    <i className="fas fa-trash ms-2"></i>
+                  </span>
+                </button>
               ) : (
                 <>
-                  <button className="btn btn-secondary" onClick={handleCollect}>
-                    Remove Collection
-                    <span>
-                      <i className="fas fa-bookmark ms-2"></i>
-                    </span>
-                  </button>
+                  {!collected ? (
+                    <>
+                      <button
+                        className="btn btn-danger"
+                        onClick={handleCollect}
+                      >
+                        Add My Collection
+                        <span>
+                          <i className="far fa-bookmark ms-2"></i>
+                        </span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={handleCollect}
+                      >
+                        Remove Collection
+                        <span>
+                          <i className="fas fa-bookmark ms-2"></i>
+                        </span>
+                      </button>
+                    </>
+                  )}
                 </>
               )}
             </div>
           </div>
         </div>
       </main>
+
+      <ModalConfirm
+        show={show}
+        handleClose={() => {
+          setShow(false);
+        }}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 }

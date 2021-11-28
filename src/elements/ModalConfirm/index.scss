@@ -1,0 +1,26 @@
+.modal-dialog {
+  max-width: 390px !important;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+  .modal-content {
+    background-color: #161616;
+    padding: 10px;
+
+    .button-group {
+      display: flex;
+      justify-content: end;
+
+      .btn {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+
+        width: 90px;
+        margin-top: 15px;
+      }
+    }
+  }
+}

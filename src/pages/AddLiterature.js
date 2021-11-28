@@ -76,7 +76,7 @@ export default function AddLiterature() {
         setForm({
           title: "",
           userId: state.user?.id,
-          publication_date: "2020-12-12",
+          publication_date: date,
           pages: "",
           isbn: "",
           author: "",
