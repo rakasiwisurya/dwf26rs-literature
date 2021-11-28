@@ -31,7 +31,7 @@ export default function MyCollection() {
 
       <main className="pt-4">
         <div className="container">
-          <h1 className="h3 fw-bold text-light">My Collection</h1>
+          <h1 className="h3 fw-bold text-light mb-4">My Collection</h1>
           <div className="row">
             {myCollections.map((item, index) => (
               <div className="col-3" key={`myCollections-${index}`}>

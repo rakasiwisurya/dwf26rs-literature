@@ -89,7 +89,7 @@ export default function UserHome() {
                   </select>
                 </div>
                 <div className="col">
-                  <div className="row g-4">
+                  <div className="row g-3">
                     {resultSearch
                       .filter((item) => {
                         if (

@@ -151,4 +151,25 @@ body {
     color: $black;
     min-height: 650px;
   }
+
+  .react-pdf__Page__annotations,
+  .react-pdf__Page__textContent {
+    display: none;
+  }
+
+  .detail-literature {
+    .react-pdf__Page__canvas {
+      width: 295px !important;
+      height: 400px !important;
+      border-radius: 7px;
+    }
+  }
+
+  .add-literature {
+    .react-pdf__Page__canvas {
+      width: 200px !important;
+      height: 270px !important;
+      border-radius: 7px;
+    }
+  }
 }

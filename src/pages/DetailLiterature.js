@@ -1,14 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { NotificationManager } from "react-notifications";
+import { pdfjs, Document, Page } from "react-pdf";
 
 import { API } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
 
 import Header from "components/Header";
 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 export default function DetailLiterature() {
   const { id } = useParams();
+  const history = useHistory();
 
   const { state } = useContext(AuthContext);
 
@@ -72,7 +76,11 @@ export default function DetailLiterature() {
         if (response.status === 200) {
           NotificationManager.success(
             response.data.message,
-            response.data.status
+            response.data.status,
+            4000,
+            () => {
+              history.push("/collection");
+            }
           );
 
           setCollected(true);
@@ -100,12 +108,20 @@ export default function DetailLiterature() {
         <div className="container">
           <div className="row">
             <div className="col-auto">
-              <iframe
+              {/* <iframe
                 src={detailLiterature?.attache}
                 title={detailLiterature?.title}
                 height="400"
                 width="295"
-              />
+              /> */}
+              <Document file={detailLiterature?.attache}>
+                <Page
+                  pageNumber={1}
+                  width={295}
+                  height={400}
+                  className="rounded"
+                />
+              </Document>
             </div>
             <div className="col ps-5">
               <div className="tag mb-4">

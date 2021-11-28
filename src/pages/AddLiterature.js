@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
+import { pdfjs, Document, Page } from "react-pdf";
 
 import { AuthContext } from "contexts/AuthContext";
 import { API } from "config/api";
@@ -8,13 +9,22 @@ import { API } from "config/api";
 import Header from "components/Header";
 import { InputFileLiterature } from "elements";
 
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 export default function AddLiterature() {
+  let date = new Date().toLocaleDateString("id-ID");
+  const day = date.split("/")[0];
+  const month = date.split("/")[1];
+  const year = date.split("/")[2];
+  date = `${year}-${month}-${day}`;
+
   const { state } = useContext(AuthContext);
 
+  const [preview, setPreview] = useState(null);
   const [form, setForm] = useState({
     title: "",
     userId: state.user?.id,
-    publication_date: "2020-12-12",
+    publication_date: date,
     pages: "",
     isbn: "",
     author: "",
@@ -27,6 +37,14 @@ export default function AddLiterature() {
       [e.target.id]:
         e.target.type === "file" ? e.target.files[0] : e.target.value,
     }));
+
+    if (e.target.type === "file") {
+      const fileList = e.target.files;
+
+      for (const file of fileList) {
+        setPreview(URL.createObjectURL(file));
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -64,6 +82,8 @@ export default function AddLiterature() {
           author: "",
           attache: "",
         });
+
+        setPreview(null);
 
         NotificationManager.success(
           response.data.message,
@@ -136,6 +156,19 @@ export default function AddLiterature() {
             </FloatingLabel>
 
             <InputFileLiterature onChange={handleChange} />
+
+            {preview && (
+              <div className="mt-3">
+                <Document file={preview}>
+                  <Page
+                    pageNumber={1}
+                    width={200}
+                    height={270}
+                    className="rounded"
+                  />
+                </Document>
+              </div>
+            )}
 
             <div className="d-flex justify-content-end w-100">
               <Button variant="danger" type="submit" className="px-5 py-2">

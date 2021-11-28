@@ -1,0 +1,22 @@
+.react-pdf__Page__canvas {
+  width: 200px !important;
+  height: 270px !important;
+  border-radius: 7px;
+}
+
+.react-pdf__Page__annotations,
+.react-pdf__Page__textContent {
+  display: none;
+}
+
+.pdf-literature {
+  width: 225px;
+  cursor: pointer;
+  background-color: #252525;
+  border-radius: 7px;
+  padding: 15px;
+}
+
+.pdf-literature:hover {
+  background-color: rgba($color: #fff, $alpha: 0.15);
+}
