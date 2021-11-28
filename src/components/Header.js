@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { AuthContext } from "contexts/AuthContext";
 
@@ -7,6 +7,9 @@ import Logo from "assets/images/literature-small.svg";
 import { Dropdown } from "react-bootstrap";
 
 export default function Header() {
+  const { pathname } = useLocation();
+  const splitLocation = pathname.split("/");
+
   const { state, dispatch } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -26,7 +29,11 @@ export default function Header() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link
-                  className="nav-link text-white"
+                  className={`nav-link ${
+                    splitLocation[1] === "profile"
+                      ? "text-danger"
+                      : "text-white"
+                  }`}
                   aria-current="page"
                   to="/profile"
                 >
@@ -35,7 +42,11 @@ export default function Header() {
               </li>
               <li className="nav-item">
                 <Link
-                  className="nav-link text-white"
+                  className={`nav-link ${
+                    splitLocation[1] === "collection"
+                      ? "text-danger"
+                      : "text-white"
+                  }`}
                   aria-current="page"
                   to="/collection"
                 >
@@ -44,7 +55,11 @@ export default function Header() {
               </li>
               <li className="nav-item">
                 <Link
-                  className="nav-link text-white"
+                  className={`nav-link ${
+                    splitLocation[1] === "add-literature"
+                      ? "text-danger"
+                      : "text-white"
+                  }`}
                   aria-current="page"
                   to="/add-literature"
                 >

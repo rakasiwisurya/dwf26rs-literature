@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { NotificationManager } from "react-notifications";
 
 import { API } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
 
 import Header from "components/Header";
-import { NotificationManager } from "react-notifications";
 
 export default function DetailLiterature() {
   const { id } = useParams();
