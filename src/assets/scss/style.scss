@@ -180,4 +180,23 @@ body {
       border-radius: 7px;
     }
   }
+
+  .my-profile {
+    .container {
+      display: flex;
+      justify-content: center;
+
+      .profile {
+        width: 650px;
+
+        .card {
+          background-color: #252525 !important;
+
+          .data {
+            width: 278px;
+          }
+        }
+      }
+    }
+  }
 }
