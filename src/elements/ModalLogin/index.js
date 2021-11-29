@@ -51,7 +51,6 @@ export default function ModalLogin(props) {
         );
         handleClose();
 
-        // history.push("/home");
         window.location.reload();
       }
     } catch (error) {

@@ -8,6 +8,7 @@ import { AuthContext } from "contexts/AuthContext";
 
 import Header from "components/Header";
 import { ModalConfirm } from "elements";
+import { donwloadPdf } from "utils/donwloadPdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -21,6 +22,10 @@ export default function DetailLiterature() {
   const [detailCollection, setDetailCollection] = useState(null);
   const [collected, setCollected] = useState(false);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    getDetailLiterature();
+  }, []);
 
   const getDetailLiterature = async () => {
     try {
@@ -111,12 +116,9 @@ export default function DetailLiterature() {
     }
   };
 
-  useEffect(() => {
-    getDetailLiterature();
-  }, []);
-
   const handleDownload = () => {
-    window.open(detailLiterature.attache);
+    donwloadPdf(detailLiterature.attache, String(detailLiterature.title));
+    NotificationManager.success("Download starting...", "Success");
   };
 
   return (
@@ -126,7 +128,13 @@ export default function DetailLiterature() {
       <main className="pt-4">
         <div className="container">
           <div className="row">
-            <div className="col-auto">
+            <div
+              className="col-auto"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                window.open(detailLiterature?.attache);
+              }}
+            >
               <Document file={detailLiterature?.attache}>
                 <Page
                   pageNumber={1}
