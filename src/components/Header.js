@@ -79,7 +79,10 @@ export default function Header() {
             </ul>
           )}
 
-          <Link className="navbar-brand" to="/">
+          <Link
+            className="navbar-brand"
+            to={`${state.isLogin ? "/home" : "/"}`}
+          >
             <img src={Logo} alt="Literature Logo" />
           </Link>
 

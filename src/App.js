@@ -64,20 +64,17 @@ function App() {
         <>
           <Router>
             <Switch>
-              {state.user ? (
-                <PrivateRoute exact path="/" component={Home} />
-              ) : (
-                <Route exact path="/" component={Landing} />
-              )}
+              <Route exact path="/" component={Landing} />
+              <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/add-literature" component={AddLiterature} />
               <PrivateRoute path="/detail/:id" component={DetailLiterature} />
               <PrivateRoute path="/collection" component={MyCollection} />
             </Switch>
           </Router>
+          <NotificationContainer />
         </>
       )}
-      <NotificationContainer />
     </div>
   );
 }

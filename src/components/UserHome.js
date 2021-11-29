@@ -9,7 +9,7 @@ export default function UserHome() {
   const [search, setSearch] = useState("");
   const [resultSearch, setResultSearch] = useState([]);
   const [years, setYears] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedYear, setSelectedYear] = useState("");
 
   const handleChangeYears = (e) => {
     setSelectedYear(e.target.value);
@@ -91,13 +91,11 @@ export default function UserHome() {
                 <div className="col">
                   <div className="row g-3">
                     {resultSearch
-                      .filter((item) => {
-                        if (
+                      .filter(
+                        (item) =>
+                          item?.status === "Approve" &&
                           item?.publication_date.split("-")[0] >= selectedYear
-                        ) {
-                          return item;
-                        }
-                      })
+                      )
                       .map((item, index) => (
                         <div className="col-3" key={`result-search-${index}`}>
                           <PdfLiterature
