@@ -2,13 +2,11 @@ import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 
-import Landing from "pages/Landing";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import AddLiterature from "pages/AddLiterature";
 import MyCollection from "pages/MyCollection";
 import DetailLiterature from "pages/DetailLiterature";
-import LoggedIn from "pages/LoggedIn";
 import NotFound from "pages/NotFound";
 
 import PrivateRoute from "PrivateRoute";
@@ -66,13 +64,7 @@ function App() {
         <>
           <Router>
             <Switch>
-              {state.isLogin ? (
-                <Route exact path="/" component={LoggedIn} />
-              ) : (
-                <Route exact path="/" component={Landing} />
-              )}
-              <Route exact path="/" component={Landing} />
-              <PrivateRoute exact path="/home" component={Home} />
+              <Route exact path="/" component={Home} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/add-literature" component={AddLiterature} />
               <PrivateRoute path="/detail/:id" component={DetailLiterature} />
