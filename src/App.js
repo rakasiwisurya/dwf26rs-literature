@@ -8,6 +8,8 @@ import Profile from "pages/Profile";
 import AddLiterature from "pages/AddLiterature";
 import MyCollection from "pages/MyCollection";
 import DetailLiterature from "pages/DetailLiterature";
+import LoggedIn from "pages/LoggedIn";
+import NotFound from "pages/NotFound";
 
 import PrivateRoute from "PrivateRoute";
 import { AuthContext } from "contexts/AuthContext";
@@ -64,12 +66,18 @@ function App() {
         <>
           <Router>
             <Switch>
+              {state.isLogin ? (
+                <Route exact path="/" component={LoggedIn} />
+              ) : (
+                <Route exact path="/" component={Landing} />
+              )}
               <Route exact path="/" component={Landing} />
               <PrivateRoute exact path="/home" component={Home} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/add-literature" component={AddLiterature} />
               <PrivateRoute path="/detail/:id" component={DetailLiterature} />
               <PrivateRoute path="/collection" component={MyCollection} />
+              <Route component={NotFound} />
             </Switch>
           </Router>
           <NotificationContainer />
