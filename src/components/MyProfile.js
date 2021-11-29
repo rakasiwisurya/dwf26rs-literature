@@ -13,9 +13,10 @@ export default function MyProfile({ state }) {
   });
 
   const handleChange = (e) => {
-    setForm({
+    setForm((prevState) => ({
+      ...prevState,
       [e.target.id]: e.target.value,
-    });
+    }));
   };
 
   const handleEdit = async () => {
@@ -171,7 +172,7 @@ export default function MyProfile({ state }) {
                   <div>
                     <div className="mb-2">
                       <button className="btn btn-success" onClick={handleEdit}>
-                        <i class="fas fa-check"></i>
+                        <i className="fas fa-check"></i>
                       </button>
                     </div>
                     <div className="mb-2">
@@ -181,7 +182,7 @@ export default function MyProfile({ state }) {
                           setEditable(false);
                         }}
                       >
-                        <i class="fas fa-ban"></i>
+                        <i className="fas fa-ban"></i>
                       </button>
                     </div>
                   </div>
@@ -193,7 +194,7 @@ export default function MyProfile({ state }) {
                         setEditable(true);
                       }}
                     >
-                      <i class="fas fa-edit"></i>
+                      <i className="fas fa-edit"></i>
                     </button>
                   </div>
                 )}

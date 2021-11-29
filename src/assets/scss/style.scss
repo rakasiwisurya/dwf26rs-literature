@@ -158,6 +158,17 @@ body {
   }
 
   .detail-literature {
+    .pdf-edit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      width: 295px;
+      height: 400px;
+      background-color: rgba($color: #000, $alpha: 0.50);
+    }
+
     .tag-title {
       font-size: 20;
     }
