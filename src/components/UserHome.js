@@ -4,9 +4,11 @@ import { API } from "config/api";
 
 import Literature from "assets/images/literature-large.svg";
 import PdfLiterature from "elements/PdfLiterature";
+import NoData from "./NoData";
 
 export default function UserHome() {
   const [search, setSearch] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
   const [resultSearch, setResultSearch] = useState([]);
   const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState("");
@@ -43,8 +45,8 @@ export default function UserHome() {
       const response = await API.get(`literature?title=${search}`);
 
       setResultSearch(response.data.data);
-
       publication_year(response.data.data);
+      setIsSearch(true);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +54,7 @@ export default function UserHome() {
 
   return (
     <div className="user-home">
-      {resultSearch.length ? (
+      {isSearch ? (
         <main className="py-4">
           <div className="container">
             <div className="research mb-5" style={{ width: 600 }}>
@@ -72,41 +74,49 @@ export default function UserHome() {
             </div>
             <div className="result-search">
               <div className="row">
-                <div className="col-2">
-                  <div className="text-danger ms-3 mb-2">Anytime</div>
-                  <select
-                    className="form-select"
-                    name="year"
-                    id="year"
-                    value={selectedYear}
-                    onChange={handleChangeYears}
-                  >
-                    {years.map((item, index) => (
-                      <option value={item} key={`year-${index}`}>
-                        Since {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                {resultSearch.length ? (
+                  <div className="col-2">
+                    <div className="text-danger ms-3 mb-2">Anytime</div>
+                    <select
+                      className="form-select"
+                      name="year"
+                      id="year"
+                      value={selectedYear}
+                      onChange={handleChangeYears}
+                    >
+                      {years.map((item, index) => (
+                        <option value={item} key={`year-${index}`}>
+                          Since {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : null}
                 <div className="col">
                   <div className="row g-3">
-                    {resultSearch
-                      .filter(
-                        (item) =>
-                          item?.status === "Approve" &&
-                          item?.publication_date.split("-")[0] >= selectedYear
-                      )
-                      .map((item, index) => (
-                        <div className="col-3" key={`result-search-${index}`}>
-                          <PdfLiterature
-                            attachment={item?.attache}
-                            literatureId={item?.id}
-                            title={item?.title}
-                            author={item?.author}
-                            publication_date={item?.publication_date}
-                          />
-                        </div>
-                      ))}
+                    {resultSearch.length ? (
+                      resultSearch
+                        .filter(
+                          (item) =>
+                            item?.status === "Approve" &&
+                            item?.publication_date.split("-")[0] >= selectedYear
+                        )
+                        .map((item, index) => (
+                          <div className="col-3" key={`result-search-${index}`}>
+                            <PdfLiterature
+                              attachment={item?.attache}
+                              literatureId={item?.id}
+                              title={item?.title}
+                              author={item?.author}
+                              publication_date={item?.publication_date}
+                            />
+                          </div>
+                        ))
+                    ) : (
+                      <div className="col">
+                        <NoData />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

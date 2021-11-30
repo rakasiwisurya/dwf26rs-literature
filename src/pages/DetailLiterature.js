@@ -191,17 +191,22 @@ export default function DetailLiterature() {
                     <button className="btn btn-secondary" disabled>
                       You are the owner
                       <span>
-                        <i class="fas fa-user-tag  ms-2"></i>
+                        <i className="fas fa-user-tag  ms-2"></i>
                       </span>
                     </button>
                   </div>
 
                   {detailLiterature?.status === "Cancel" && (
                     <div className="mb-3">
-                      <button className="btn btn-danger w-100">
+                      <button
+                        className="btn btn-danger w-100"
+                        onClick={() => {
+                          setShow(true);
+                        }}
+                      >
                         Delete Literature
                         <span>
-                          <i class="fas fa-trash ms-2"></i>
+                          <i className="fas fa-trash ms-2"></i>
                         </span>
                       </button>
                     </div>
@@ -255,7 +260,7 @@ export default function DetailLiterature() {
         handleClose={() => {
           setShow(false);
         }}
-        handleDelete={handleDelete}
+        handleProceed={handleDelete}
       />
     </div>
   );

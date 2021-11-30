@@ -8,7 +8,7 @@ import { AuthContext } from "contexts/AuthContext";
 import { API } from "config/api";
 
 import Header from "components/Header";
-import { InputFileLiterature } from "elements";
+import { InputFileLiterature, ModalConfirm } from "elements";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -16,8 +16,8 @@ export default function AddLiterature() {
   const history = useHistory();
 
   let date = new Date().toLocaleDateString("id-ID");
-  const day = date.split("/")[0];
-  const month = date.split("/")[1];
+  const day = String(date.split("/")[0]).padStart(2, "0");
+  const month = String(date.split("/")[1]).padStart(2, "0");
   const year = date.split("/")[2];
   date = `${year}-${month}-${day}`;
 
@@ -35,6 +35,8 @@ export default function AddLiterature() {
     attache: "",
   });
 
+  console.log(form.publication_date);
+
   const handleChange = (e) => {
     setForm((prevState) => ({
       ...prevState,
@@ -51,9 +53,7 @@ export default function AddLiterature() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     try {
       const config = {
         headers: {
@@ -85,15 +85,16 @@ export default function AddLiterature() {
         });
 
         setPreview(null);
+        setShow(false);
 
-        if (response.status === 200) {
-          NotificationManager.success(
-            response.data.message,
-            response.data.status
-          );
-
-          history.push("/profile");
-        }
+        NotificationManager.success(
+          response.data.message,
+          response.data.status,
+          4000,
+          () => {
+            history.push("/profile");
+          }
+        );
       }
     } catch (error) {
       console.log(error.response);
@@ -113,7 +114,12 @@ export default function AddLiterature() {
       <main className="py-4">
         <div className="container">
           <h1 className="h3 fw-bold mb-4">Add Literature</h1>
-          <Form onSubmit={handleSubmit}>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setShow(true);
+            }}
+          >
             <FloatingLabel className="mb-3" controlId="title" label="Title">
               <Form.Control
                 type="text"
@@ -194,6 +200,14 @@ export default function AddLiterature() {
           </Form>
         </div>
       </main>
+
+      <ModalConfirm
+        show={show}
+        handleClose={() => {
+          setShow(false);
+        }}
+        handleProceed={handleSubmit}
+      />
     </div>
   );
 }
