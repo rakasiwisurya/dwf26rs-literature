@@ -13,7 +13,7 @@ export default function InputFileAvatar({ userId, avatar }) {
       const formData = new FormData();
       formData.set("avatar", e.target.files[0], e.target.files[0].name);
 
-      await API.put(`/users/${userId}`, formData, config);
+      await API.put(`/users/avatar/${userId}`, formData, config);
 
       window.location.reload();
     } catch (error) {
