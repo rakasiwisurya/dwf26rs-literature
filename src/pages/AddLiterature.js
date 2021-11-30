@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useHistory } from "react-router";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
 import { pdfjs, Document, Page } from "react-pdf";
@@ -12,6 +13,8 @@ import { InputFileLiterature } from "elements";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function AddLiterature() {
+  const history = useHistory();
+
   let date = new Date().toLocaleDateString("id-ID");
   const day = date.split("/")[0];
   const month = date.split("/")[1];
@@ -20,6 +23,7 @@ export default function AddLiterature() {
 
   const { state } = useContext(AuthContext);
 
+  const [show, setShow] = useState(false);
   const [preview, setPreview] = useState(null);
   const [form, setForm] = useState({
     title: "",
@@ -57,7 +61,6 @@ export default function AddLiterature() {
         },
       };
 
-      // create data with form data as object
       const formData = new FormData();
 
       formData.set("attache", form.attache, form.attache.name);
@@ -68,10 +71,8 @@ export default function AddLiterature() {
       formData.set("isbn", form.isbn);
       formData.set("author", form.author);
 
-      // insert data trip to database
       const response = await API.post("/literatures", formData, config);
 
-      // notif success and go to home page
       if (response?.status === 200) {
         setForm({
           title: "",
@@ -85,14 +86,18 @@ export default function AddLiterature() {
 
         setPreview(null);
 
-        NotificationManager.success(
-          response.data.message,
-          response.data.status
-        );
+        if (response.status === 200) {
+          NotificationManager.success(
+            response.data.message,
+            response.data.status
+          );
+
+          history.push("/profile");
+        }
       }
     } catch (error) {
-      console.log(error);
-      if (error?.response.data?.message) {
+      console.log(error.response);
+      if (error?.response?.data?.message) {
         return NotificationManager.error(
           error.response.data.message,
           error.response.data.status
@@ -171,9 +176,20 @@ export default function AddLiterature() {
             )}
 
             <div className="d-flex justify-content-end w-100">
-              <Button variant="danger" type="submit" className="px-5 py-2">
-                Add Literature
-              </Button>
+              {form.title &&
+              form.pages &&
+              form.isbn &&
+              form.author &&
+              form.author &&
+              form.attache ? (
+                <Button variant="danger" type="submit" className="px-5 py-2">
+                  Add Literature
+                </Button>
+              ) : (
+                <Button variant="secondary" disabled className="px-5 py-2">
+                  Add Literature
+                </Button>
+              )}
             </div>
           </Form>
         </div>
