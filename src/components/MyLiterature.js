@@ -23,7 +23,7 @@ export default function MyLiterature({ state }) {
     <section className="my-literature mt-5">
       <div className="container">
         <h1 className="h3 fw-bold mb-4">My Literature</h1>
-        <div className="row">
+        <div className="row gy-5">
           {myLiterature.length ? (
             myLiterature.map((item, index) => (
               <div

@@ -69,7 +69,34 @@ body {
     margin-top: 90px;
   }
 
+  .notif {
+    border-radius: 8px;
+    text-align: center;
+    line-height: 3;
+
+    &.notif-danger {
+      background-color: rgba($color: #EC7A7A, $alpha: 0.1);
+      color: #EC7A7A;
+    }
+
+    &.notif-warning {
+      background-color: rgba($color: #FF9900, $alpha: 0.1);
+      color: #FF9900;
+    }
+
+    &.notif-success {
+      background-color: rgba($color: #3CF71E, $alpha: 0.1);
+      color: #3CF71E;
+    }
+  }
+
   .form-control {
+    &:disabled {
+      background-color: rgba($color: #D2D2D2, $alpha: 0.25);
+      border: 2px solid #BCBCBC;
+      color: #929292;
+    }
+
     background-color: rgba($color: #D2D2D2, $alpha: 0.25);
     border: 2px solid #BCBCBC;
     color: #fff;

@@ -64,6 +64,7 @@ export default function MyProfile({ state }) {
                             placeholder="Email"
                             onChange={handleChange}
                             value={form.email}
+                            disabled
                           />
                         </FloatingLabel>
                       </div>

@@ -186,12 +186,43 @@ export default function DetailLiterature() {
             </div>
             <div className="col-auto">
               {state.user?.id === detailLiterature?.user.id ? (
-                <button className="btn btn-secondary" disabled>
-                  You are the owner
-                  <span>
-                    <i class="fas fa-user-tag  ms-2"></i>
-                  </span>
-                </button>
+                <>
+                  <div className="mb-3">
+                    <button className="btn btn-secondary" disabled>
+                      You are the owner
+                      <span>
+                        <i class="fas fa-user-tag  ms-2"></i>
+                      </span>
+                    </button>
+                  </div>
+
+                  {detailLiterature?.status === "Cancel" && (
+                    <div className="mb-3">
+                      <button className="btn btn-danger w-100">
+                        Delete Literature
+                        <span>
+                          <i class="fas fa-trash ms-2"></i>
+                        </span>
+                      </button>
+                    </div>
+                  )}
+
+                  <div
+                    className={`notif fw-bold
+                      ${
+                        detailLiterature?.status === "Waiting Approve" &&
+                        "notif-warning"
+                      }
+                      ${
+                        detailLiterature?.status === "Approve" &&
+                        "notif-success"
+                      }
+                      ${detailLiterature?.status === "Cancel" && "notif-danger"}
+                      `}
+                  >
+                    {detailLiterature?.status}
+                  </div>
+                </>
               ) : (
                 <>
                   {!detailCollection ? (

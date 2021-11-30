@@ -13,6 +13,7 @@ import PrivateRoute from "PrivateRoute";
 import { AuthContext } from "contexts/AuthContext";
 import { API, setAuthToken } from "config/api";
 
+import Loading from "assets/images/loading.svg";
 import "react-notifications/lib/notifications.css";
 import "assets/scss/style.scss";
 
@@ -58,7 +59,7 @@ function App() {
           className="d-flex justify-content-center align-items-center w-100"
           style={{ height: "100vh" }}
         >
-          Loading...
+          <img src={Loading} alt="loading" />
         </div>
       ) : (
         <>
