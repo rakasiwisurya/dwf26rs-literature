@@ -14,7 +14,7 @@ export default function MyCollection() {
 
   const getMyCollections = async () => {
     try {
-      const response = await API.get(`/collections/${state.user?.id}`);
+      const response = await API.get(`/collections`);
 
       setMyCollections(response.data.data);
     } catch (error) {

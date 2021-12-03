@@ -3,12 +3,12 @@ import NoData from "./NoData";
 import PdfLiterature from "elements/PdfLiterature";
 import { API } from "config/api";
 
-export default function MyLiterature({ state }) {
+export default function MyLiterature() {
   const [myLiterature, setMyLiterature] = useState([]);
 
   const getMyLiterature = async () => {
     try {
-      const response = await API.get(`/profile/${state.user?.id}/literatures`);
+      const response = await API.get(`/profile/literatures`);
       setMyLiterature(response.data.data);
     } catch (error) {
       console.log(error);

@@ -73,10 +73,7 @@ export default function DetailLiterature() {
           },
         };
 
-        const body = JSON.stringify({
-          userId: state.user?.id,
-          literatureId: detailLiterature.id,
-        });
+        const body = JSON.stringify({ literatureId: detailLiterature.id });
 
         const response = await API.post("/collections", body, config);
 
@@ -230,14 +227,7 @@ export default function DetailLiterature() {
                 </>
               ) : (
                 <>
-                  {!detailCollection ? (
-                    <button className="btn btn-danger" onClick={handleCollect}>
-                      Add My Collection
-                      <span>
-                        <i className="far fa-bookmark ms-2"></i>
-                      </span>
-                    </button>
-                  ) : (
+                  {detailCollection ? (
                     <button
                       className="btn btn-secondary"
                       onClick={handleCollect}
@@ -245,6 +235,13 @@ export default function DetailLiterature() {
                       Remove Collection
                       <span>
                         <i className="fas fa-bookmark ms-2"></i>
+                      </span>
+                    </button>
+                  ) : (
+                    <button className="btn btn-danger" onClick={handleCollect}>
+                      Add My Collection
+                      <span>
+                        <i className="far fa-bookmark ms-2"></i>
                       </span>
                     </button>
                   )}

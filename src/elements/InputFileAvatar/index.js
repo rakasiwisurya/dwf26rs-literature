@@ -1,7 +1,7 @@
 import { API } from "config/api";
 import "./index.scss";
 
-export default function InputFileAvatar({ userId, avatar }) {
+export default function InputFileAvatar({ avatar }) {
   const handleChange = async (e) => {
     try {
       const config = {
@@ -13,7 +13,7 @@ export default function InputFileAvatar({ userId, avatar }) {
       const formData = new FormData();
       formData.set("avatar", e.target.files[0], e.target.files[0].name);
 
-      await API.put(`/users/avatar/${userId}`, formData, config);
+      await API.put(`/users/avatar`, formData, config);
 
       window.location.reload();
     } catch (error) {

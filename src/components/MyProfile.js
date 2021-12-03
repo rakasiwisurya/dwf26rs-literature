@@ -31,7 +31,7 @@ export default function MyProfile({ state }) {
 
       const body = JSON.stringify(form);
 
-      await API.put(`/users/${state.user.id}`, body, config);
+      await API.put(`/users`, body, config);
 
       window.location.reload();
     } catch (error) {
@@ -200,10 +200,7 @@ export default function MyProfile({ state }) {
                   </div>
                 )}
 
-                <InputFileAvatar
-                  userId={state.user?.id}
-                  avatar={state.user?.avatar}
-                />
+                <InputFileAvatar avatar={state.user?.avatar} />
               </div>
             </div>
           </div>

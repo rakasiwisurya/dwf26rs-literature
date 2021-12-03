@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { API } from "config/api";
 
@@ -13,29 +13,26 @@ export default function UserHome() {
   const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState("");
 
+  useEffect(() => {
+    getYears();
+  }, []);
+
+  const getYears = () => {
+    const year = new Date().getFullYear();
+    const allYear = Array.from(
+      new Array(10),
+      (val, index) => year - index
+    ).sort((a, b) => b - a);
+    setYears(allYear);
+    setSelectedYear(allYear[allYear.length - 1]);
+  };
+
   const handleChangeYears = (e) => {
     setSelectedYear(e.target.value);
   };
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-  };
-
-  const publication_year = (data) => {
-    const pub_years = data.map((item) => {
-      return item.publication_date.split("-")[0];
-    });
-
-    const uniqueYears = pub_years
-      .filter((value, index) => {
-        return pub_years.indexOf(value) === index;
-      })
-      .sort((a, b) => {
-        return b - a;
-      });
-
-    setYears(uniqueYears);
-    setSelectedYear(uniqueYears[uniqueYears.length - 1]);
   };
 
   const handleSearch = async (e) => {
@@ -45,7 +42,6 @@ export default function UserHome() {
       const response = await API.get(`literature?title=${search}`);
 
       setResultSearch(response.data.data);
-      publication_year(response.data.data);
       setIsSearch(true);
     } catch (error) {
       console.log(error);
@@ -74,24 +70,22 @@ export default function UserHome() {
             </div>
             <div className="result-search">
               <div className="row">
-                {resultSearch.length ? (
-                  <div className="col-2">
-                    <div className="text-danger ms-3 mb-2">Anytime</div>
-                    <select
-                      className="form-select"
-                      name="year"
-                      id="year"
-                      value={selectedYear}
-                      onChange={handleChangeYears}
-                    >
-                      {years.map((item, index) => (
-                        <option value={item} key={`year-${index}`}>
-                          Since {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ) : null}
+                <div className="col-2">
+                  <div className="text-danger ms-3 mb-2">Anytime</div>
+                  <select
+                    className="form-select"
+                    name="year"
+                    id="year"
+                    value={selectedYear}
+                    onChange={handleChangeYears}
+                  >
+                    {years.map((item, index) => (
+                      <option value={item} key={`year-${index}`}>
+                        Since {item}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div className="col">
                   <div className="row g-3">
                     {resultSearch.length ? (

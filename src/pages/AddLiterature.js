@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
 import { pdfjs, Document, Page } from "react-pdf";
 
-import { AuthContext } from "contexts/AuthContext";
 import { API } from "config/api";
 
 import Header from "components/Header";
@@ -21,21 +20,16 @@ export default function AddLiterature() {
   const year = date.split("/")[2];
   date = `${year}-${month}-${day}`;
 
-  const { state } = useContext(AuthContext);
-
   const [show, setShow] = useState(false);
   const [preview, setPreview] = useState(null);
   const [form, setForm] = useState({
     title: "",
-    userId: state.user?.id,
     publication_date: date,
     pages: "",
     isbn: "",
     author: "",
     attache: "",
   });
-
-  console.log(form.publication_date);
 
   const handleChange = (e) => {
     setForm((prevState) => ({
@@ -65,7 +59,6 @@ export default function AddLiterature() {
 
       formData.set("attache", form.attache, form.attache.name);
       formData.set("title", form.title);
-      formData.set("userId", form.userId);
       formData.set("publication_date", form.publication_date);
       formData.set("pages", form.pages);
       formData.set("isbn", form.isbn);
@@ -76,7 +69,6 @@ export default function AddLiterature() {
       if (response?.status === 200) {
         setForm({
           title: "",
-          userId: state.user?.id,
           publication_date: date,
           pages: "",
           isbn: "",
