@@ -5,9 +5,22 @@ import { API } from "config/api";
 
 import Header from "./Header";
 import NoData from "./NoData";
+import { Pagination } from "elements";
 
 export default function AdminHome() {
   const [literatures, setLiteratures] = useState([]);
+  const [currentPage, setCurrentPage] = useState(2);
+
+  const literaturesPerPage = 5;
+
+  const indexOfLastLiterature = currentPage * literaturesPerPage;
+  const indexOfFirstPage = indexOfLastLiterature - literaturesPerPage;
+  const currentLiterature = literatures.slice(
+    indexOfFirstPage,
+    indexOfLastLiterature
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const getLiteratures = async () => {
     try {
@@ -54,7 +67,7 @@ export default function AdminHome() {
       <div className="container">
         <Header />
 
-        <main className="pt-4">
+        <main className="py-4">
           <h1
             className="h3 fw-bold mb-4"
             style={{ fontFamily: "avenir, sans-serif" }}
@@ -63,88 +76,101 @@ export default function AdminHome() {
           </h1>
 
           {literatures.length ? (
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>User or Author</th>
-                  <th>ISBN</th>
-                  <th>Literature</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {literatures.map((item, index) => (
-                  <tr key={`data-${index}`}>
-                    <td className="py-3">{index + 1}</td>
-                    <td className="py-3">{item?.author}</td>
-                    <td className="py-3">{item?.isbn}</td>
-                    <td className="py-3">
-                      <a
-                        href={item?.attache.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-info text-decoration-none"
-                      >
-                        {item?.attache.filename}
-                      </a>
-                    </td>
-                    <td className="py-3">
-                      <div
-                        className={`fw-bold ${
-                          (item?.status === "Waiting Approve" &&
-                            "text-smooth-warning") ||
-                          (item?.status === "Approve" &&
-                            "text-smooth-success") ||
-                          (item?.status === "Cancel" && "text-smooth-danger")
-                        }`}
-                      >
-                        {item?.status === "Waiting Approve"
-                          ? "Waiting to be verified"
-                          : item?.status}
-                      </div>
-                    </td>
-                    <td className="py-3">
-                      {item?.status === "Waiting Approve" && (
-                        <div className="row gx-2">
-                          <div className="col">
-                            <button
-                              className="btn btn-smooth-danger text-white w-100 fw-bold"
-                              onClick={() => {
-                                handleAction(item.id, "Cancel");
-                              }}
-                            >
-                              Cancel
-                            </button>
+            <>
+              <div style={{ height: 370 }}>
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>User or Author</th>
+                      <th>ISBN</th>
+                      <th>Literature</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentLiterature.map((item) => (
+                      <tr key={`data-${item?.id}`}>
+                        <td className="py-3">
+                          {literatures.indexOf(item) + 1}
+                        </td>
+                        <td className="py-3">{item?.author}</td>
+                        <td className="py-3">{item?.isbn}</td>
+                        <td className="py-3">
+                          <a
+                            href={item?.attache.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-info text-decoration-none"
+                          >
+                            {item?.attache.filename}
+                          </a>
+                        </td>
+                        <td className="py-3">
+                          <div
+                            className={`fw-bold ${
+                              (item?.status === "Waiting Approve" &&
+                                "text-smooth-warning") ||
+                              (item?.status === "Approve" &&
+                                "text-smooth-success") ||
+                              (item?.status === "Cancel" &&
+                                "text-smooth-danger")
+                            }`}
+                          >
+                            {item?.status === "Waiting Approve"
+                              ? "Waiting to be verified"
+                              : item?.status}
                           </div>
-                          <div className="col">
-                            <button
-                              className="btn btn-smooth-success text-white w-100 fw-bold"
-                              onClick={() => {
-                                handleAction(item.id, "Approve");
-                              }}
-                            >
-                              Approve
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                      {item?.status === "Approve" && (
-                        <div className="text-center">
-                          <i className="fas fa-check-circle text-success fs-2"></i>
-                        </div>
-                      )}
-                      {item?.status === "Cancel" && (
-                        <div className="text-center">
-                          <i className="fas fa-times-circle text-danger fs-2"></i>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        </td>
+                        <td className="py-3">
+                          {item?.status === "Waiting Approve" && (
+                            <div className="row gx-2">
+                              <div className="col">
+                                <button
+                                  className="btn btn-smooth-danger text-white w-100 fw-bold"
+                                  onClick={() => {
+                                    handleAction(item.id, "Cancel");
+                                  }}
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                              <div className="col">
+                                <button
+                                  className="btn btn-smooth-success text-white w-100 fw-bold"
+                                  onClick={() => {
+                                    handleAction(item.id, "Approve");
+                                  }}
+                                >
+                                  Approve
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                          {item?.status === "Approve" && (
+                            <div className="text-center">
+                              <i className="fas fa-check-circle text-success fs-2"></i>
+                            </div>
+                          )}
+                          {item?.status === "Cancel" && (
+                            <div className="text-center">
+                              <i className="fas fa-times-circle text-danger fs-2"></i>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <Pagination
+                literaturesPerPage={literaturesPerPage}
+                totalLiterature={literatures.length}
+                paginate={paginate}
+              />
+            </>
           ) : (
             <NoData />
           )}

@@ -3,3 +3,4 @@ export { default as ModalRegister } from "./ModalRegister";
 export { default as ModalConfirm } from "./ModalConfirm";
 export { default as InputFileAvatar } from "./InputFileAvatar";
 export { default as InputFileLiterature } from "./InputFileLiterature";
+export { default as Pagination } from "./Pagination";
