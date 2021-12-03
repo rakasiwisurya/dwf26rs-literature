@@ -1,6 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-
-import { AuthContext } from "contexts/AuthContext";
+import { useEffect, useState } from "react";
 import { API } from "config/api";
 
 import Header from "components/Header";
@@ -8,8 +6,6 @@ import NoData from "components/NoData";
 import PdfLiterature from "elements/PdfLiterature";
 
 export default function MyCollection() {
-  const { state } = useContext(AuthContext);
-
   const [myCollections, setMyCollections] = useState([]);
 
   const getMyCollections = async () => {

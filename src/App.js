@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { NotificationContainer } from "react-notifications";
 
+import Landing from "pages/Landing";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import AddLiterature from "pages/AddLiterature";
@@ -65,7 +66,8 @@ function App() {
         <>
           <Router>
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route path="/auth" component={Landing} />
+              <PrivateRoute exact path="/" component={Home} />
               <PrivateRoute path="/profile" component={Profile} />
               <PrivateRoute path="/add-literature" component={AddLiterature} />
               <PrivateRoute path="/detail/:id" component={DetailLiterature} />
