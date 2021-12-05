@@ -176,8 +176,14 @@ body {
   .admin-home {
     background-color: #F9F9F9;
     color: $black;
-    // min-height: 650px;
     min-height: 650px;
+
+    .page-link {
+      &.active {
+        background-color: $blue;
+        color: $white;
+      }
+    }
   }
 
   .react-pdf__Page__annotations,

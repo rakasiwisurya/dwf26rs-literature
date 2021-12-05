@@ -1,10 +1,8 @@
 import "./index.scss";
 
-export default function Pagination({
-  literaturesPerPage,
-  totalLiterature,
-  paginate,
-}) {
+export default function Pagination(props) {
+  const { literaturesPerPage, totalLiterature, paginate, currentPage } = props;
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalLiterature / literaturesPerPage); i++) {
@@ -17,10 +15,11 @@ export default function Pagination({
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <div
-              className="page-link"
+              className={`page-link ${currentPage === number && "active"}`}
               style={{ cursor: "pointer" }}
-              onClick={() => {
+              onClick={(e) => {
                 paginate(number);
+                console.log(e);
               }}
             >
               {number}

@@ -9,7 +9,7 @@ import { Pagination } from "elements";
 
 export default function AdminHome() {
   const [literatures, setLiteratures] = useState([]);
-  const [currentPage, setCurrentPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const literaturesPerPage = 5;
 
@@ -169,6 +169,7 @@ export default function AdminHome() {
                 literaturesPerPage={literaturesPerPage}
                 totalLiterature={literatures.length}
                 paginate={paginate}
+                currentPage={currentPage}
               />
             </>
           ) : (
