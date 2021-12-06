@@ -1,13 +1,15 @@
 import "./index.scss";
 
 export default function Pagination(props) {
-  const { literaturesPerPage, totalLiterature, paginate, currentPage } = props;
+  const { literaturePerPage, totalLiterature, paginate, currentPage } = props;
 
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalLiterature / literaturesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalLiterature / literaturePerPage); i++) {
     pageNumbers.push(i);
   }
+
+  console.log(totalLiterature);
 
   return (
     <nav className="mt-4">
@@ -17,9 +19,8 @@ export default function Pagination(props) {
             <div
               className={`page-link ${currentPage === number && "active"}`}
               style={{ cursor: "pointer" }}
-              onClick={(e) => {
+              onClick={() => {
                 paginate(number);
-                console.log(e);
               }}
             >
               {number}

@@ -11,13 +11,13 @@ export default function AdminHome() {
   const [literatures, setLiteratures] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const literaturesPerPage = 5;
+  let literaturePerPage = 5;
 
-  const indexOfLastLiterature = currentPage * literaturesPerPage;
-  const indexOfFirstPage = indexOfLastLiterature - literaturesPerPage;
+  const indexOfLastPage = currentPage * literaturePerPage;
+  const indexOfFirstPage = indexOfLastPage - literaturePerPage;
   const currentLiterature = literatures.slice(
     indexOfFirstPage,
-    indexOfLastLiterature
+    indexOfLastPage
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -90,8 +90,8 @@ export default function AdminHome() {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentLiterature.map((item) => (
-                      <tr key={`data-${item?.id}`}>
+                    {currentLiterature.map((item, index) => (
+                      <tr key={`data-${index}`}>
                         <td className="py-3">
                           {literatures.indexOf(item) + 1}
                         </td>
@@ -166,7 +166,7 @@ export default function AdminHome() {
               </div>
 
               <Pagination
-                literaturesPerPage={literaturesPerPage}
+                literaturePerPage={literaturePerPage}
                 totalLiterature={literatures.length}
                 paginate={paginate}
                 currentPage={currentPage}

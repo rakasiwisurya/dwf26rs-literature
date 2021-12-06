@@ -62,7 +62,7 @@ body {
   h4,
   h5,
   h6 {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
   }
 
   main {
@@ -75,69 +75,69 @@ body {
     line-height: 3;
 
     &.notif-danger {
-      background-color: rgba($color: #EC7A7A, $alpha: 0.1);
-      color: #EC7A7A;
+      background-color: rgba($color: #ec7a7a, $alpha: 0.1);
+      color: #ec7a7a;
     }
 
     &.notif-warning {
-      background-color: rgba($color: #FF9900, $alpha: 0.1);
-      color: #FF9900;
+      background-color: rgba($color: #ff9900, $alpha: 0.1);
+      color: #ff9900;
     }
 
     &.notif-success {
-      background-color: rgba($color: #3CF71E, $alpha: 0.1);
-      color: #3CF71E;
+      background-color: rgba($color: #3cf71e, $alpha: 0.1);
+      color: #3cf71e;
     }
   }
 
   .form-control {
     &:disabled {
-      background-color: rgba($color: #D2D2D2, $alpha: 0.25);
-      border: 2px solid #BCBCBC;
+      background-color: rgba($color: #d2d2d2, $alpha: 0.25);
+      border: 2px solid #bcbcbc;
       color: #929292;
     }
 
-    background-color: rgba($color: #D2D2D2, $alpha: 0.25);
-    border: 2px solid #BCBCBC;
+    background-color: rgba($color: #d2d2d2, $alpha: 0.25);
+    border: 2px solid #bcbcbc;
     color: #fff;
     resize: none;
   }
 
   .form-control:focus {
     box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25);
-    background-color: rgba($color: #D2D2D2, $alpha: 0.25);
-    color: $white
+    background-color: rgba($color: #d2d2d2, $alpha: 0.25);
+    color: $white;
   }
 
   .form-select {
     background-color: #ddd;
-    border: 2px solid #BCBCBC;
+    border: 2px solid #bcbcbc;
     color: #6c757d;
     cursor: pointer;
   }
 
   .form-select:focus {
-    box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25)
+    box-shadow: 0 0 0 0.25rem rgba($color: #fff, $alpha: 0.25);
   }
 
   .btn-smooth-danger {
-    background-color: #FF0742;
+    background-color: #ff0742;
   }
 
   .text-smooth-danger {
-    color: #FF0742;
+    color: #ff0742;
   }
 
   .text-smooth-warning {
-    color: #F7941E;
+    color: #f7941e;
   }
 
   .btn-smooth-success {
-    background-color: #0ACF83;
+    background-color: #0acf83;
   }
 
   .text-smooth-success {
-    color: #0ACF83;
+    color: #0acf83;
   }
 
   .modal-backdrop {
@@ -174,7 +174,7 @@ body {
   }
 
   .admin-home {
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     color: $black;
     min-height: 650px;
 
@@ -200,7 +200,7 @@ body {
       top: 0;
       width: 295px;
       height: 400px;
-      background-color: rgba($color: #000, $alpha: 0.50);
+      background-color: rgba($color: #000, $alpha: 0.5);
     }
 
     .tag-title {

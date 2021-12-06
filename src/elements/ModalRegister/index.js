@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import { Form, Modal, Button, FloatingLabel } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
 
@@ -8,6 +9,8 @@ import "./index.scss";
 
 export default function ModalRegister(props) {
   const { show, handleClose, handleSwitch, dispatch } = props;
+
+  const history = useHistory();
 
   const [form, setForm] = useState({
     email: "",
@@ -47,6 +50,8 @@ export default function ModalRegister(props) {
           type: "LOGIN_SUCCESS",
           payload: response.data.data,
         });
+
+        history.push("/");
       }
     } catch (error) {
       console.log(error);
