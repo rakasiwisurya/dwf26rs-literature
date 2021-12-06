@@ -91,7 +91,7 @@ export default function AdminHome() {
                   </thead>
                   <tbody>
                     {currentLiterature
-                      .sort((a, b) => b.id - a.id)
+                      .sort((a, b) => a.id - b.id)
                       .map((item, index) => (
                         <tr key={`data-${index}`}>
                           <td className="py-3">
