@@ -90,77 +90,79 @@ export default function AdminHome() {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentLiterature.map((item, index) => (
-                      <tr key={`data-${index}`}>
-                        <td className="py-3">
-                          {literatures.indexOf(item) + 1}
-                        </td>
-                        <td className="py-3">{item?.author}</td>
-                        <td className="py-3">{item?.isbn}</td>
-                        <td className="py-3">
-                          <a
-                            href={item?.attache.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-info text-decoration-none"
-                          >
-                            {item?.attache.filename}
-                          </a>
-                        </td>
-                        <td className="py-3">
-                          <div
-                            className={`fw-bold ${
-                              (item?.status === "Waiting Approve" &&
-                                "text-smooth-warning") ||
-                              (item?.status === "Approve" &&
-                                "text-smooth-success") ||
-                              (item?.status === "Cancel" &&
-                                "text-smooth-danger")
-                            }`}
-                          >
-                            {item?.status === "Waiting Approve"
-                              ? "Waiting to be verified"
-                              : item?.status}
-                          </div>
-                        </td>
-                        <td className="py-3">
-                          {item?.status === "Waiting Approve" && (
-                            <div className="row gx-2">
-                              <div className="col">
-                                <button
-                                  className="btn btn-smooth-danger text-white w-100 fw-bold"
-                                  onClick={() => {
-                                    handleAction(item.id, "Cancel");
-                                  }}
-                                >
-                                  Cancel
-                                </button>
+                    {currentLiterature
+                      .sort((a, b) => b.id - a.id)
+                      .map((item, index) => (
+                        <tr key={`data-${index}`}>
+                          <td className="py-3">
+                            {literatures.indexOf(item) + 1}
+                          </td>
+                          <td className="py-3">{item?.author}</td>
+                          <td className="py-3">{item?.isbn}</td>
+                          <td className="py-3">
+                            <a
+                              href={item?.attache.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-info text-decoration-none"
+                            >
+                              {item?.attache.filename}
+                            </a>
+                          </td>
+                          <td className="py-3">
+                            <div
+                              className={`fw-bold ${
+                                (item?.status === "Waiting Approve" &&
+                                  "text-smooth-warning") ||
+                                (item?.status === "Approve" &&
+                                  "text-smooth-success") ||
+                                (item?.status === "Cancel" &&
+                                  "text-smooth-danger")
+                              }`}
+                            >
+                              {item?.status === "Waiting Approve"
+                                ? "Waiting to be verified"
+                                : item?.status}
+                            </div>
+                          </td>
+                          <td className="py-3">
+                            {item?.status === "Waiting Approve" && (
+                              <div className="row gx-2">
+                                <div className="col">
+                                  <button
+                                    className="btn btn-smooth-danger text-white w-100 fw-bold"
+                                    onClick={() => {
+                                      handleAction(item.id, "Cancel");
+                                    }}
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                                <div className="col">
+                                  <button
+                                    className="btn btn-smooth-success text-white w-100 fw-bold"
+                                    onClick={() => {
+                                      handleAction(item.id, "Approve");
+                                    }}
+                                  >
+                                    Approve
+                                  </button>
+                                </div>
                               </div>
-                              <div className="col">
-                                <button
-                                  className="btn btn-smooth-success text-white w-100 fw-bold"
-                                  onClick={() => {
-                                    handleAction(item.id, "Approve");
-                                  }}
-                                >
-                                  Approve
-                                </button>
+                            )}
+                            {item?.status === "Approve" && (
+                              <div className="text-center">
+                                <i className="fas fa-check-circle text-success fs-2"></i>
                               </div>
-                            </div>
-                          )}
-                          {item?.status === "Approve" && (
-                            <div className="text-center">
-                              <i className="fas fa-check-circle text-success fs-2"></i>
-                            </div>
-                          )}
-                          {item?.status === "Cancel" && (
-                            <div className="text-center">
-                              <i className="fas fa-times-circle text-danger fs-2"></i>
-                            </div>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                            )}
+                            {item?.status === "Cancel" && (
+                              <div className="text-center">
+                                <i className="fas fa-times-circle text-danger fs-2"></i>
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
